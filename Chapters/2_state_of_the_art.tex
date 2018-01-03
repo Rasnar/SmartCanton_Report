@@ -1,0 +1,105 @@
+\chapter{State of the art}
+\label{2_state_of_the_art}
+
+
+\section{\textit{Smart Cities}}
+
+
+
+\section{LPWAN}
+
+
+
+\section{\textit{Software}}
+
+Pour l'implémentation logicielle plusieurs alternatives sont possibles. Dans le cas de l'utilisation de processeurs implémentant des communications sans fils, un \textbf{Real Time Operating System} (\textit{RTOS}) est nécessaire. 
+
+\section{\textit{Hardware}}
+
+Les dispositifs matériels sur le marché implémentant une interface de communication utilisent souvent deux processeurs. Un premier processeurs, souvent le moins puissant, est utilisé pour la gestion de l'interface de communication. Il s'occupe à lui seul de la communication avec l'extérieur. Ceci peut être une tâche coûteuse selon le type de protocole implémenté. Par exemple, si de la cryptographie rentre en jeu, une partie 
+
+Celui-ci communique ensuite avec un processeur plus puissant via une interface de communication variant selon les implémentation. Ce deuxième processeur est à disposition de l'utilisateur pour toutes les tâches qu'il souhaite. Mais il doit souvent tenir compte que la communication avec le premier processeur coûte tout de même quelques ressources. A cause de ce type de structure mais aussi de la complexité à maintenir un système stable, un \textit{RTOS} doit être utilisé.\\
+
+
+On trouve divers fabricants proposant des kits de développement orientés IoT et très facilement utilisable dans un concept SmartCity. L'un des plus connus est STMicroelectronics\footnote{\url{http://www.st.com/content/st_com/en.html}}. Il propose une très grande panoplie de capteurs pouvant êtres utilisés dans un grand nombre de situations\footnote{\url{http://www.st.com/en/evaluation-tools/stm32-nucleo-expansion-boards.html?querycriteria=productId=SC1971}}. Les kits de développement de STM sont souvent utilisés par des passionnés car ils sont très facile d'accès en terme de disponibilité mais aussi en terme de coût. On trouve ainsi des kits avec du WiFi, du NFS ainsi que du Bluetooth pour moins de 50 CHF. L'écosystème STM disposent d'une très grande communauté ainsi que de librairies très bien construisent qui offrent ainsi une aise lors de l'implémentation d'un projet personnel. Une grande partie de leurs kits de développement sont supportés par la plateforme mbed\footnote{\url{https://www.mbed.com/en/}} maintenue par la société de conception d'architecture de processeurs ARM. La plateforme mbed offre ainsi une suite de librairies facilitant également l'implémentation ainsi que la programmation. 
+
+Un problème provenant de ces kit est la disponibilité. Certains de ces kits ne sont pas censé être utilisé pour des produits finaux. Ils restent des plateformes afin de pouvoir tester le produit vendu, ce qui n'oblige aucunement le vendeur a garantir une disponibilité ni même une compatibilité entre les différents designs. Certaines cartes de développement peuvent arrêter d'être produite du jour du lendemain. C'est un problème conséquent si cette carte est utilisée dans un produit commercial. 
+
+Il restent au final des kits de développement, qui sont bon marché. Ils permettent de créer très facilement des prototypes très rapidement. Ils sont donc idéaux pour des \textit{proof of concept}. Mais lorsque l'utilisateur désire avoir un produit final, il est forcé à implémenter le processeur directement dans une carte électronique sur mesures.
+
+On voit ainsi plusieurs acteurs sur le marché proposant des kits. Les plus grand fabricants de microcontrôleurs sont STM, NXP ou Texas Instruments, proposant chacun des plateformes et des exemples afin de tester leurs produits. \\
+
+
+Libelium\footnote{\url{http://www.libelium.com/}} est également un acteur dans le marché des SmartCities. Une différence avec STMicroelectronics est déjà que Libelium n'est pas un fabricant de microcontrôleur en tant que tel. Ils proposent plusieurs cartes, mais la plupart basées sur un processeur d'Atmel ATMEGA1281 
+Cela rend l'utilisation de leurs équipement très simple. Mais malheureusement limite la puissance de calcul car ce processeur n'est pas très puissant et l'utilisation de l'environnement Arduino pour la programmation réduit grandement la flexibilité et la puissance de calcul pour l'utilisateur.
+
+
+
+\section{Communication sans fil à 2.4 GHz}
+\label{sec_2_4_GHz}
+
+La plage de fréquence autour de 2.4 GHz est l'une des plus utilisée au monde. Ceci est dû au fait que celle-ci peut être utilisée sans avoir besoin d'une licence provenant d'une autorité de certification et cela dans tous les pays du monde \cite{ISMbandW77:online}. Plusieurs autres fréquences sont également ouvertes dans le monde, mais le succès de cette plage provient de trois facteurs : 
+\begin{itemize}
+    \item La taille de l'antenne. En effet, un principe simple en radio communication est que plus la fréquence est élevée et plus l'antenne peut être compacte. On peut facilement le constater avec la \autoref{eq:dipole_base_formula} représentant la longueur d'un dipôle \cite{DipoleLe18:online}. La constante A dépend principalement la longueur de l'antenne en fonction de l'épaisseur du matériaux utilisé. Cette constante se situe typiquement entre 0.96 et 0.98 \cite{DipoleLe18:online}. Il est possible de trouver divers graphique permettant d'obtenir la valeur de cette constante \footnote{\url{http://www.radio-electronics.com/info/antennas/dipole/length-calculation-formula.php}}, facilitant ainsi son dimensionnement.
+    
+    
+    \begin{equation}
+    \label{eq:dipole_base_formula}
+    Length \ dip\hat{o}le [m] = \frac{150 * A}{freq [MHz]}
+    \end{equation}
+
+    \begin{equation}
+    \label{eq:dipole_2_4GHz}
+    Longeur \ dip\hat{o}le [m] = \frac{150 * 0.98}{2400} = 0.06125 = 6.125 [cm]
+    \end{equation}
+    
+    \begin{equation}
+    \label{eq:dipole_433MHz}
+    Longeur \ dip\hat{o}le [m] = \frac{150 * 0.98}{433} \approx 0.33949 = 33.949 [cm]
+    \end{equation}
+    
+    En utilisant l'\autoref{eq:dipole_base_formula} avec 2.4 GHz (\autoref{eq:dipole_2_4GHz}) et 433 MHz (\autoref{eq:dipole_433MHz}) on observe bien l'influence de la fréquence sur ce dipôle et donc la place qui devra être allouée à une antenne sur une carte électronique. Grâce à une miniaturisation qui devient donc raisonnable on peut ainsi facilement offrir des périphériques compactes.
+    
+    \item La technologie électronique disponible pour gérer ces hautes fréquences. Grâce à l'avancée dans les domaines de l'électronique et de la microélectronique, il est maintenant possible d'avoir des circuit intégrés pouvant offrir la modulation à cette fréquence et cela en ayant un taille raisonnable. Le microcontrôleur utilisé dans ce projet offre par exemple un \textit{package} de 3.9mmx3.8mm et ne nécessitant aucun élément électronique externe pour l'antenne. Ceci permet de créer une carte électronique extrêmement compacte. Le prix de ce type de technologie est de plus en plus négligeable lors du développement(cf. \autoref{subsect:microcontroleur} pour un comparatif plus approfondi des microcontrôleur compatible Bluetooth avec des indications de prix).
+    
+    \item La distance couverte par cette plage de fréquence. Cette fréquence permet d'avoir une distance tout à fait raisonnable entre la deux périphériques. Le Bluetooth 5.0 peut ainsi atteindre, en théorie, jusqu'à 240m dans un environnement ouvert. 
+
+
+    
+\end{itemize}
+
+La fréquence de 2.4GHz est utilisée par de nombreux protocoles. On y trouve le Bluetooth, le Wi-Fi, 
+ou une panoplie d'autres standards, comme le IEEE 802.15.2. Si on prend l'exemple d'un smartphone ou d'une tablette. Les seuls protocoles supportés universellement sur toutes ces plateformes sont le Bluetooth ainsi que le Wi-Fi. Le problème de ce dernier est l'impacte sur la consommation des appareils, mais avec comme avantage d'avoir une grand débit. Le Bluetooth est lui plutôt utilisé lors de la communication avec des périphériques proches de l'utilisateur et ne nécessitant pas un aussi grand débit de données, offrant ainsi une plus grande autonomie. Le Wi-Fi est lui plus utilisé dans le cadre d'un besoin de communication avec des données externes, provenant par exemple d'Internet.\\
+
+Même la modulation LoRa est maintenant disponible dans cette fréquence grâce au circuit intégré Semtech SX1280\footnote{\url{http://www.semtech.com/wireless-rf/rf-transceivers/sx1280/}}. \\
+
+Le marché du Bluetooth est en pleine expansion depuis plusieurs années. Cette tendance provient surtout dû au faite de la démocratisation des smartphones. Le Bluetooth est en effet l'une des rares interfaces de communication présente sur tous les dispositifs comme pour les communication LTE ou WiFi. L'évolution dans ce domaine est 
+
+
+Le Bluetooth 5.0 a été officiellement annoncé le 16 juin 2016. Néanmoins, les premiers microcontrôleur implémentant toutes les fonctionnalités de ce protocole n'ont été annoncé que pour courant 2017. Une partie des prérequis pour passer au Bluetooth 5.0 ne nécessitent qu'une mise à jour logicielle. Par exemple, l'augmentation de la taille des \textit{advertissements}, qui passent de maximum 31 bytes à 255 bytes. Il aurait été intéressant d'avoir un processeur compatible Bluetooth 5.0. Mais peu sont actuellement disponibles, même si de 
+
+
+
+\section{LoRa}
+
+Le cas du LoRa est plus problématique que celui du Bluetooth. En effet, un seul fabricant est à l'heure actuelle autorisé à produire les puces avec la modulation LoRa, il s'agit de la société Semtech\footnote{\url{http://www.semtech.com/}}. 
+
+Cela réduit donc considérablement le nombre de possibilités. Semtech a annoncée une collaboration avec STMicroelectronics pour développeur un processeurs dans lequel on retrouve un STM32 avec en interne un coeur attribué uniquement à la modulation LoRa et l'implémentation du protocole LoRaWAN.
+
+
+Mais en attendant ce microcontrôleur est en cours de développeur. Murata, un célèbre fabricant de semiconducteur s'est donc allié avec STMicroelectronics afin d'offrir un module nommé CMWX1ZZABZ-078. Ce module est composé en interne d'un STM32L0 basé sur une architecture ARM Cortex M0+ qui communique en interne avec un SX1276 de Semtech pour la communication LoRa.
+
+Ce module permet surtout une économie de place sur la carte électronique. Sa taille est de 12.5x11.6x1.76mm permettant ainsi facilement son placement sur une carte électronique. Il permet également de réduire les temps d'implémentation car une suite de librairie est disponible 
+
+
+
+
+\section{SmartCanton}
+
+
+
+Le canton Genève s'est donné comme objectif stratégique de devenir un pilier dans le domaine des smart cities d'ici 2030 \cite{Genevebr38:online}. Celui-ci deviendrai ainsi un Smart Canton dans lequels les utilisateurs pourraient accéder aux données capturées et les utiliser dans le cadre de projets personnels mais également commerciaux. Le but, une fois les données capturées est de les faire parler. Pour cela on peut imaginer plusieurs algorithmes de Machine Learning permettant de créer des modèles afin de pouvoir mieux conseiller les habitants, analyser les risques et également réduire les coûts de certaines actions qui nécessecitent actuellement la présence d'une personne physique à proximité. 
+
+Un POC (\textit{\textbf{P}roof \textbf{O}f \textbf{C}oncept}) a donc été lancé dans ce sens afin de pouvoir présenter différentes approchent de ce SmartCanton ainsi que les limitations et les opportunités des différentes technologies possibles. La technologie retenue pour pouvoir remonter les données a été le LoRa. 
+
+

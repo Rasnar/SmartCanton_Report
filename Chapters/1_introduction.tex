@@ -1,0 +1,27 @@
+\chapter{Introduction}
+\label{1_introduction}
+
+
+De nos jours, de plus en plus de villes proposent des données aux habitant. Ces données sont acquises en utilisant divers capteurs disséminés à travers la ville.
+
+L'expression \textit{Smart City} est de plus en plus présente dans notre quotidien. C'est principalement dans une optique d'améliorer la qualité des services urbains ou de réduire leurs coûts que les institutions publiques sont intéressées par ce concept. 
+
+
+
+Dans la canton de Genève, en Suisse, plusieurs données sont accessibles librement par la population. Ces données sont mises à disposition par le \textbf{Système d'Information du Territoire à Genève} (\textit{SITG}).
+
+
+
+
+\section{Contexte}
+
+Le canton de Genève a décidé proposer un projet de SmartCanton afin de laisser la possibilité à des entreprises ou des individuelles de proposer fournir des données afin d'alimenter une base de données communes. 
+
+Afin de couvrir une plus grande zone possible, une technologie de type LPWAN (Low-Power Wide-Area Network) est utilisée. La technologie retenu pour ces capteurs a été le LoRa \cite{LPWANWik40:online}. LoRa est une modulation de fréquence (couche 1 du modèle OSI) propriétaire à l'entreprise Semtech. LoRa utilise différentes fréquences dans le monde en fonction des fréquences libres. En Europe il s'agit de la fréquence 868 MHz alors qu'en Amérique du Nord la fréquence de 915MHz est quand à elle utilisée. On dessus de cette couche physique on peut trouver différentes spécifications possibles. Celle utilisée dans ce projet est le LoRaWAN. LoRaWAN est la spécification proposée par la LoRa Alliance \cite{loraalli46:online}. 
+
+Le projet SmartCanton doit également couvrir la sécurité, que ce soit au niveau du transfert des données, mais également sur l'authentification sur le réseau. Une fois un dispositif sur le réseau, les données échangées sont toujours chiffrées. Ceci est géré par la spécification LoRaWAN. 
+
+La DGSI souhaite créer des clés d'authentification au réseau LoRa avec des temps de validité. Il y a donc la problématique d'échange de ces clés avec le périphérique quand l'une de ces clés arrive à péremption. A l'heure actuelle ces périphériques reçoivent toutes les clés lorsqu'ils sont programmés (en mode ABP) ou reçoivent des clés quand ils s'authentifient auprès d'un réseau (OTAA). 
+
+
+
