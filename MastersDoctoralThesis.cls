@@ -182,6 +182,9 @@
 %	REQUIRED PACKAGES
 %----------------------------------------------------------------------------------------
 
+\usepackage{minted}
+\usemintedstyle{vs}
+
 \RequirePackage{babel} % Required for automatically changing names of document elements to languages besides english
 
 \RequirePackage{scrbase} % Required for handling language-dependent names of sections/document elements
@@ -246,7 +249,7 @@
 %	COLOURS
 %----------------------------------------------------------------------------------------
 
-\usepackage{xcolor} % Required for specifying custom colours
+\usepackage[table, x11names]{xcolor} % Required for specifying custom colours
 
 \colorlet{mdtRed}{red!50!black}
 
@@ -322,6 +325,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 \newcommand{\abbrevname}{List of Abbreviations}
 \providecaptionname{english,british,american}{\abbrevname}{List of Abbreviations}
+\providecaptionname{french}{\abbrevname}{Abr\'{e}viations}
 \providecaptionname{ngerman,german,austrian,naustrian}{\abbrevname}{Abk\"urzungsverzeichnis}
 \NewDocumentEnvironment{abbreviations}{ m }{%
 	\ifbool{nolistspace}{\begingroup\singlespacing}{}
@@ -339,7 +343,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 
 \DeclareDocumentCommand{\abstractauthorfont}{}{}
 \DeclareDocumentCommand{\abstracttitlefont}{}{}
-\newcommand{\byname}{by}
+\newcommand{\byname}{par}
 \newcommand{\abstractname}{Abstract}
 \providecaptionname{german,ngerman,austrian,naustrian}{\byname}{von}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish}{\byname}{par}
@@ -359,19 +363,19 @@ KOMA-script documentation for details.}]{fancyhdr}
 		#1%added to be able to have abstract more than one page long
 		\thispagestyle{plain}
 		\begin{center}
-			{\normalsize \MakeUppercase{\univname} \par} % University name in capitals
-			\bigskip
+% 			{\normalsize \MakeUppercase{\univname} \par} % University name in capitals
+% 			\bigskip
 			{\huge\textit{\abstractname} \par}
-			\bigskip
-			{\normalsize \facname \par} % Faculty name
-			{\normalsize \deptname \par} % Department name
-			\bigskip
-			{\normalsize \degreename\par} % Degree name
-			\bigskip
+			\medskip
+% 			{\normalsize \facname \par} % Faculty name
+% 			{\normalsize \deptname \par} % Department name
+% 			\bigskip
+% 			{\normalsize \degreename\par} % Degree name
+% 			\bigskip
 			{\normalsize\bfseries \@title \par} % Thesis title
 			\medskip
 			{\normalsize \byname{} \authorname \par} % Author name
-			\bigskip
+			\medskip
 		\end{center}
 	}
 	{
@@ -408,9 +412,9 @@ KOMA-script documentation for details.}]{fancyhdr}
 %	ACKNOWLEDGEMENTS PAGE DESIGN
 %----------------------------------------------------------------------------------------
 
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \colorlet{mdtRed}{red!50!black}
-\newcommand{\acknowledgementname}{Acknowledgements}
+\newcommand{\acknowledgementname}{Remerciements}
 \providecaptionname{american,australian,british,canadian,english,newzealand,UKenglish,USenglish} {\acknowledgementname}{Acknowledgements} % Acknowledgement text for English countries
 \providecaptionname{german,ngerman,austrian,naustrian}{\acknowledgementname}{Danksagung} % Acknowledgement text for Germanic countries
 
@@ -521,6 +525,7 @@ KOMA-script documentation for details.}]{fancyhdr}
 \hypersetup{pdfpagemode={UseOutlines},
 bookmarksopen=true,
 bookmarksopenlevel=0,
+bookmarksdepth=10,
 hypertexnames=false,
 colorlinks=true, % Set to false to disable coloring links
 citecolor=magenta, % The color of citations
